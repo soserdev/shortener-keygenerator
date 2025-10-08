@@ -5,11 +5,11 @@ import dev.smo.shortener.keygenerator.util.Base62Encoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class KeyGenerationService {
+public class KeyGeneratorService {
 
     private final CounterService counterService;
 
-    public KeyGenerationService(CounterService counterService) {
+    public KeyGeneratorService(CounterService counterService) {
         this.counterService = counterService;
     }
 

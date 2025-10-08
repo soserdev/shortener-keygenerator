@@ -1,25 +1,28 @@
 package dev.smo.shortener.keygenerator.controller;
 
 import dev.smo.shortener.keygenerator.dto.KeyResponse;
-import dev.smo.shortener.keygenerator.service.KeyGenerationService;
+import dev.smo.shortener.keygenerator.service.KeyGeneratorService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/keys")
 public class KeyGeneratorController {
 
-    private final KeyGenerationService keyGenerationService;
+    private final KeyGeneratorService keyGeneratorService;
 
-    public KeyGeneratorController(KeyGenerationService keyGenerationService) {
-        this.keyGenerationService = keyGenerationService;
+    public KeyGeneratorController(KeyGeneratorService keyGeneratorService) {
+        this.keyGeneratorService = keyGeneratorService;
     }
 
     @GetMapping("/next")
     public KeyResponse generateKey() {
-        long id = keyGenerationService.getNextKey();
-        String key = keyGenerationService.encode(id);
+        long id = keyGeneratorService.getNextKey();
+        String key = keyGeneratorService.encode(id);
+        log.info(String.format("Key generated: %s, %s", id, key));
         return new KeyResponse(id, key);
     }
 }

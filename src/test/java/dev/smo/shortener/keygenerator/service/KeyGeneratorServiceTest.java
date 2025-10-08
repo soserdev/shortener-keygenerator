@@ -11,9 +11,9 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class KeyGenerationServiceTest {
+class KeyGeneratorServiceTest {
 
-    private KeyGenerationService service;
+    private KeyGeneratorService service;
     private CounterService counterService;
 
     // Simulate a counter starting from 4783 so first call returns 4784
@@ -23,7 +23,7 @@ class KeyGenerationServiceTest {
     void setUp() {
         counterService = mock(CounterService.class);
         when(counterService.getNext()).thenAnswer(invocation -> ++mockCounter);
-        service = new KeyGenerationService(counterService);
+        service = new KeyGeneratorService(counterService);
     }
 
     @Test

@@ -1,6 +1,6 @@
 package dev.smo.shortener.keygenerator.controller;
 
-import dev.smo.shortener.keygenerator.service.KeyGenerationService;
+import dev.smo.shortener.keygenerator.service.KeyGeneratorService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -18,7 +18,7 @@ class KeyGeneratorControllerTest {
     private MockMvc mockMvc;
 
     @MockitoBean
-    private KeyGenerationService keyGenerationService;
+    private KeyGeneratorService keyGeneratorService;
 
     @Test
     void testGenerateKeyEndpoint() throws Exception {
@@ -26,8 +26,8 @@ class KeyGeneratorControllerTest {
         long mockId = 4784L;
         String mockKey = "1cS";
 
-        when(keyGenerationService.getNextKey()).thenReturn(mockId);
-        when(keyGenerationService.encode(mockId)).thenReturn(mockKey);
+        when(keyGeneratorService.getNextKey()).thenReturn(mockId);
+        when(keyGeneratorService.encode(mockId)).thenReturn(mockKey);
 
         // Act & Assert
         mockMvc.perform(get("/api/keys/next"))

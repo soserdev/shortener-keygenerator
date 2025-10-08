@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:8.2.2-alpine3.22
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+  keygen-app:
+    image: soserdev/shortener-keygenerator:latest  # Built from your Dockerfile
+    container_name: shortener-keygenerator
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+    environment:
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+    restart: unless-stopped
+
+volumes:
+  redis-data:
