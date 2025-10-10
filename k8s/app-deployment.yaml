@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shortener-keygenerator
+  labels:
+    app: shortener-keygenerator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shortener-keygenerator
+  template:
+    metadata:
+      labels:
+        app: shortener-keygenerator
+    spec:
+      containers:
+        - name: shortener-keygenerator
+          image: soserdev/shortener-keygenerator:0.0.1  # Built from your Dockerfile
+#          ports:
+#            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: production
+#            - name: SPRING_REDIS_HOST
+#              value: redis
+#            - name: SPRING_REDIS_PORT
+#              value: "6379"
+#            - name: SPRING_REDIS_USERNAME
+#              valueFrom:
+#                secretKeyRef:
+#                  name: redis-secret
+#                  key: REDIS_USER
+#            - name: SPRING_REDIS_PASSWORD
+#              valueFrom:
+#                secretKeyRef:
+#                  name: redis-secret
+#                  key: REDIS_PASSWORD

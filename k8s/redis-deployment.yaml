@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  labels:
+    app: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:8.2.2-alpine3.22
+#          args:
+#            - redis-server
+#            - --requirepass
+#            - "$(REDIS_PASSWORD)"
+#            - --user
+#            - "$(REDIS_USER)"
+#            - "on"
+#            - ">$(REDIS_PASSWORD)"
+#            - "allcommands"
+#            - "allkeys"
+#          env:
+#            - name: REDIS_USER
+#              valueFrom:
+#                secretKeyRef:
+#                  name: redis-secret
+#                  key: REDIS_USER
+#            - name: REDIS_PASSWORD
+#              valueFrom:
+#                secretKeyRef:
+#                  name: redis-secret
+#                  key: REDIS_PASSWORD
+          ports:
+            - containerPort: 6379
+#          readinessProbe:
+#            tcpSocket:
+#              port: 6379
+#            initialDelaySeconds: 5
+#            periodSeconds: 5
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: redis-storage
+              mountPath: /data
+          command: ["redis-server", "--appendonly", "yes"]
+      volumes:
+        - name: redis-storage
+          emptyDir: {}

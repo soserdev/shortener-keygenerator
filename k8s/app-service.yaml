@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: shortener-keygenerator
+spec:
+  selector:
+    app: shortener-keygenerator
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  type: ClusterIP  # LoadBalancer Or ClusterIP if using Ingress
