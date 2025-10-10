@@ -49,6 +49,12 @@ Just simply start in IntelliJ or use:
 mvn spring-boot:run
 ```
 
+Run integration tests:
+
+```bash
+mvn clean package verify
+```
+
 ## Test It
 
 Get counter (for counter name "default"):
