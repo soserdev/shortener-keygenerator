@@ -21,6 +21,13 @@ public class KeyGeneratorService {
     }
 
     /**
+     * Returns the next counter value from the source for a specific counter (e.g., Redis).
+     */
+    public long getNextKey(String counterName) {
+        return counterService.getNext(counterName);
+    }
+
+    /**
      * Encodes a numeric key to Base62.
      */
     public String encode(long value) {

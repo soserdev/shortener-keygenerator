@@ -41,7 +41,17 @@ Stop the containers for Redis + App and remove the containers:
 docker compose -f docker-compose.yaml down
 ```
 
+## Dev
+
+Just simply start in IntelliJ or use:
+
+```bash
+mvn spring-boot:run
+```
+
 ## Test It
+
+Get counter (for counter name "default"):
 
 ```bash
 curl http://localhost:8080/api/keys/next
@@ -52,6 +62,13 @@ The response you get looks like:
 ```bash
 {"id":4794,"key":"1fk"}
 ```
+
+Get counter for a specific counter name (e.g. "mycounter"):
+
+```bash
+curl http://localhost:8080/api/keys/next/mycounter
+```
+
 
 ## Wipe Stored Data
 
