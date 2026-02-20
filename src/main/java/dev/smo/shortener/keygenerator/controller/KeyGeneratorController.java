@@ -2,16 +2,18 @@ package dev.smo.shortener.keygenerator.controller;
 
 import dev.smo.shortener.keygenerator.dto.KeyResponse;
 import dev.smo.shortener.keygenerator.service.KeyGeneratorService;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Slf4j
 @RestController
 @RequestMapping("/api/keys")
 public class KeyGeneratorController {
+
+    private static final Logger log = LoggerFactory.getLogger(KeyGeneratorController.class);
 
     private final KeyGeneratorService keyGeneratorService;
 
@@ -23,7 +25,7 @@ public class KeyGeneratorController {
     public KeyResponse generateKey() {
         long id = keyGeneratorService.getNextKey();
         String key = keyGeneratorService.encode(id);
-        log.info(String.format("Key generated: %s, %s", id, key));
+        log.info(String.format("Key generated: {}, {}", id, key));
         return new KeyResponse(id, key);
     }
 
@@ -31,7 +33,7 @@ public class KeyGeneratorController {
     public KeyResponse generateKey(@PathVariable String name) {
         long id = keyGeneratorService.getNextKey(name);
         String key = keyGeneratorService.encode(id);
-        log.info(String.format("Key generated: %s, %s", id, key));
+        log.info(String.format("Key generated: {}, {}", id, key));
         return new KeyResponse(id, key);
     }
 
