@@ -15,8 +15,7 @@ COPY --from=build /app/target/*jar app.jar
 
 # Create non-root user
 RUN addgroup -S spring && adduser -S spring -G spring \
-    && mkdir /tmp \
-    && chown -R spring:spring /app /tmp
+    && chown -R spring:spring /app
 
 USER spring:spring
 
