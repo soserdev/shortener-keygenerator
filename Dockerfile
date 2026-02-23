@@ -13,12 +13,12 @@ WORKDIR /app
 
 COPY --from=build /app/target/*jar app.jar
 
-# Create non-root user
-RUN addgroup -S spring && adduser -S spring -G spring \
-    && chown -R spring:spring /app
+# Create non-root user with fixed UID/GID
+RUN addgroup -g 1000 spring && adduser -u 1000 -S spring -G spring \
+    && mkdir -p /tmp \
+    && chown -R spring:spring /app /tmp
 
 USER spring:spring
-
 EXPOSE 8080
 
 ENV JAVA_OPTS="-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0"
