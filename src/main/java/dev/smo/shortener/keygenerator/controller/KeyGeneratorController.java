@@ -25,7 +25,7 @@ public class KeyGeneratorController {
     public KeyResponse generateKey() {
         long id = keyGeneratorService.getNextKey();
         String key = keyGeneratorService.encode(id);
-        log.info(String.format("Key generated: {}, {}", id, key));
+        log.info("Key generated: {}, {}", id, key);
         return new KeyResponse(id, key);
     }
 
@@ -33,7 +33,7 @@ public class KeyGeneratorController {
     public KeyResponse generateKey(@PathVariable String name) {
         long id = keyGeneratorService.getNextKey(name);
         String key = keyGeneratorService.encode(id);
-        log.info(String.format("Key generated: {}, {}", id, key));
+        log.info("Key generated: {}, {} for name {}", id, key, name);
         return new KeyResponse(id, key);
     }
 
