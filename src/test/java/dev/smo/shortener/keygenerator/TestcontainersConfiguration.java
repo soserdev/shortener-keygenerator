@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.utility.DockerImageName;
 
+@SuppressWarnings("resource")
 @TestConfiguration(proxyBeanMethods = false)
 public class TestcontainersConfiguration {
 
